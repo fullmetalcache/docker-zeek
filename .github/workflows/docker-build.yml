@@ -51,7 +51,7 @@ jobs:
       name: Prepare docker tags  # allows multiple docker tags like 3.0.0, 3.0, and 3
       id: prep
       run: |
-        DOCKER_IMAGE=activecm/zeek
+        DOCKER_IMAGE=dockerjocker8833/zeek
         # e.g. lts or latest
         TAGS="${DOCKER_IMAGE}:${{ matrix.tag }}"
         if [ "${{ matrix.tag }}" == "lts" ]; then
