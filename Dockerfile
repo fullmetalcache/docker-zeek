@@ -75,18 +75,13 @@ ENV ZEEKPATH .:/usr/local/zeek/share/zeek:/usr/local/zeek/share/zeek/policy:/usr
 ENV PATH $PATH:/usr/local/zeek/bin
 
 ARG ZKG_VERSION=2.7.1
-ARG ZEEK_DEFAULT_PACKAGES="bro-interface-setup bro-doctor ja3"
+ARG ZEEK_DEFAULT_PACKAGES="bro-interface-setup bro-doctor ja3 https://github.com/activecm/zeek-open-connections"
 # install Zeek package manager
 RUN pip install zkg==$ZKG_VERSION \
     && zkg autoconfig \
     && zkg refresh \
     && zkg install --force $ZEEK_DEFAULT_PACKAGES
 
-RUN mkdir /usr/local/zeek/share/zeek/policy/custom-scripts/
-RUN wget -qO /usr/local/zeek/share/zeek/policy/custom-scripts/__load__.zeek \ 
-    https://raw.githubusercontent.com/activecm/zeek-open-connections/master/scripts/__load__.zeek
-RUN wget -qO /usr/local/zeek/share/zeek/policy/custom-scripts/zeek_open_connect.zeek \ 
-    https://raw.githubusercontent.com/activecm/zeek-open-connections/master/scripts/zeek_open_connections.zeek
 ARG ZEEKCFG_VERSION=0.0.5
 
 RUN wget -qO /usr/local/zeek/bin/zeekcfg https://github.com/activecm/zeekcfg/releases/download/v${ZEEKCFG_VERSION}/zeekcfg_${ZEEKCFG_VERSION}_linux_amd64 \
