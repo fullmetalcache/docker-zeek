@@ -1,7 +1,7 @@
 FROM alpine:3.12 as builder
 
 ARG ZEEK_VERSION=3.2.3
-ARG BUILD_PROCS=2
+ARG BUILD_PROCS=8
 
 RUN apk add --no-cache zlib openssl libstdc++ libpcap libgcc
 RUN apk add --no-cache -t .build-deps \
